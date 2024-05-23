@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         fragmentList.add(SettingsFragment())
 
         // Create adapter for viewpager2
-        val demoCollectionAdapter = DemoCollectionAdapter(this, fragmentList)
+        val demoCollectionAdapter = DemoCollectionAdapter(fragmentActivity = this, fragmentList)
 
         // ViewPager2 customize
         binding.fragmentPager.adapter = demoCollectionAdapter
@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity() {
                 super.onPageSelected(position)
 
                 when (position) {
-                    0 -> binding.navBar.selectedItemId = R.id.page_a
-                    1 -> binding.navBar.selectedItemId = R.id.page_b
+                    0 -> binding.navBar.selectedItemId = R.id.page_home
+                    1 -> binding.navBar.selectedItemId = R.id.page_settings
                 }
 
             }
@@ -48,12 +48,11 @@ class MainActivity : AppCompatActivity() {
         // BottomNavigation Bar customize
         binding.navBar.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.page_a -> openPage(0)
-                R.id.page_b -> openPage(1)
-                else -> openPage(1000)
+                R.id.page_home -> openPage(pageNumber = 0)
+                R.id.page_settings -> openPage(pageNumber = 1)
+                else -> openPage(pageNumber = 1000)
             }
         }
-
     }
 
     private fun openPage(pageNumber: Int): Boolean {
@@ -65,10 +64,10 @@ class MainActivity : AppCompatActivity() {
 
 
     internal class DemoCollectionAdapter(
-        fragment: FragmentActivity,
+        fragmentActivity: FragmentActivity,
         private val arrayFragment: ArrayList<Fragment>
     ) :
-        FragmentStateAdapter(fragment) {
+        FragmentStateAdapter(fragmentActivity) {
         override fun getItemCount(): Int = arrayFragment.size
         override fun createFragment(position: Int): Fragment = arrayFragment[position]
     }
