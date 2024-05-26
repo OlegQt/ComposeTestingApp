@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">ComposeTestingApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- SETTINGS FRAGMENT -->
+    <string name="button_add_to_db_name">Add chapter to database</string>
+    <string name="button_clear_txt">Clear text</string>
 </resources>

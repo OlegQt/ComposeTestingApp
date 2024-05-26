@@ -8,7 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.composetestingapp.R
 import com.composetestingapp.databinding.MainLayoutBinding
-import com.composetestingapp.presentation.fragment.SettingsFragment
+import com.composetestingapp.presentation.fragment.chapter.SettingsFragment
 import com.composetestingapp.presentation.fragment.StartFragment
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = MainLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         customizeUiBehaviour()
     }
 
