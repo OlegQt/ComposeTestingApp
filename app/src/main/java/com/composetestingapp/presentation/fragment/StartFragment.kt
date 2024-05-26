@@ -21,8 +21,5 @@ class StartFragment : Fragment() {
                 Text(text = "HROOOOOM")
             }
         }
-
-
     }
-
 }

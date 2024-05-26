@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Modifier
@@ -25,7 +26,7 @@ class SettingsFragment : Fragment() {
             setContent {
                 Column {
                     UserInputText(viewModel.inputText, modifier = Modifier.fillMaxWidth()){
-
+                        Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
                     }
                 }
             }

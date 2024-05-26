@@ -2,10 +2,12 @@ package com.composetestingapp.presentation.fragment
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.TextField
@@ -14,8 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.composetestingapp.R
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +35,10 @@ fun UserInputText(
         value = text.value, onValueChange = {
             textLine.value = it
         },
-        modifier = modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+        modifier = modifier.padding(
+            horizontal = 16.dp,
+            vertical = 4.dp
+        ),
         colors = TextFieldDefaults.textFieldColors(
             textColor = Color.Magenta,
             focusedIndicatorColor = Color.Transparent,
@@ -39,35 +46,48 @@ fun UserInputText(
         ),
         shape = RoundedCornerShape(16.dp),
         leadingIcon = {
-            IconForInput(
-                isEnabled = text.value.isNotEmpty(),
-                clickFun = { addFun.invoke(text.value) })
+            IconAddToDB(
+                modifier = Modifier.clickable { addFun.invoke(text.value) },
+                isEnabled = text.value.isNotEmpty()
+            )
+        },
+        trailingIcon = {
+            ClearText(isEnabled = text.value.isNotEmpty(),
+                modifier = Modifier.clickable { textLine.value = "" })
         }
-
     )
 }
 
 @Composable
-fun IconForInput(isEnabled: Boolean, clickFun: () -> Unit) {
+fun IconAddToDB(modifier: Modifier = Modifier, isEnabled: Boolean) {
     val tintColor = if (isEnabled) Color.Magenta else Color.LightGray
     Icon(
-        modifier = Modifier.clickable { clickFun.invoke() },
+        modifier = modifier,
         imageVector = Icons.Default.AddCircle,
-        contentDescription = null,
+        contentDescription = stringResource(id = R.string.button_add_to_db_name),
         tint = tintColor
     )
+}
 
+@Composable
+fun ClearText(modifier: Modifier = Modifier, isEnabled: Boolean) {
+    val tintColor = if (isEnabled) Color.Magenta else Color.LightGray
+    Icon(
+        modifier = modifier,
+        imageVector = Icons.Default.Delete,
+        contentDescription = stringResource(id = R.string.button_clear_txt),
+        tint = tintColor
+    )
 }
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview
+@Preview(showSystemUi = true)
 fun UiTextFieldPreview() {
     val internalTxt = MutableStateFlow<String>("Input")
     Column {
-        UserInputText(internalTxt) {}
-        IconForInput(isEnabled = true) {}
+        UserInputText(internalTxt, Modifier.fillMaxWidth()) {}
     }
 }
 
