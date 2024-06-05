@@ -103,18 +103,17 @@ fun ListOf(modifier: Modifier = Modifier, lst: MutableStateFlow<MutableList<Stri
 
 @Composable
 fun ListItem(modifier: Modifier = Modifier, itemTitle: String) {
-    Card(modifier = modifier
-        .fillMaxWidth()
-        .padding(vertical = 4.dp)
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
     ) {
         Text(
             text = itemTitle,
             modifier = modifier.padding(horizontal = 8.dp, vertical = 4.dp)
         )
     }
-
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
