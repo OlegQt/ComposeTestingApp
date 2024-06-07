@@ -6,16 +6,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class StarterViewModel : ViewModel() {
-    private val _infoTxt = MutableStateFlow<String>("Loading")
+    val _infoTxt = MutableStateFlow<String>("Loading")
     val infoTxt = _infoTxt.asStateFlow()
 
     init {
-        saveInfo("New string")
+        //saveInfo("New string")
         loadInfo()
     }
 
     private fun loadInfo(){
-        App().getSharedPreferences()?.getString(App.SIMPLE_INFO_KEY,"default")
+        App().getSharedPreferences()?.let {
+            _infoTxt.value = it.getString(App.SIMPLE_INFO_KEY,"default").toString()
+        }
 
     }
 
