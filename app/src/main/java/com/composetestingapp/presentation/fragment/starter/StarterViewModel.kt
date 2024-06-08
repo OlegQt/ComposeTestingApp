@@ -10,8 +10,7 @@ class StarterViewModel : ViewModel() {
     val infoTxt = _infoTxt.asStateFlow()
 
     init {
-        //saveInfo("New string")
-        loadInfo()
+
     }
 
     private fun loadInfo(){
